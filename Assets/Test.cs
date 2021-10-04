@@ -5,39 +5,40 @@ using System;
 
 public class Boss
 {
-        private int hp = 100;           // 体力
-        private int power = 25;         // 攻撃力
-        private int mp = 53;            // 魔法力
+    private int hp = 100;           // 体力
+    private int power = 25;         // 攻撃力
+    private int mp = 53;            // 魔法力
 
 
-        // 攻撃用の関数
-        public void Attack()
+    // 攻撃用の関数
+    public void Attack()
+    {
+        Debug.Log(this.power + "のダメージを与えた");
+    }
+
+    // 防御用の関数
+    public void Defence(int damage)
+    {
+        Debug.Log(damage + "のダメージを受けた");
+        // 残りhpを減らす
+        this.hp -= damage;
+    }
+
+    // 魔法用の関数
+    public void Magic(int mp)
+    {
+        if (this.mp >= 5)
+        {                                                      //mpが5以上の場合
+            this.mp -= mp;                                     //mp5減らす
+            Debug.Log("魔法攻撃をした。残りMPは" + this.mp);   //コンソールに表示
+
+        }
+
+        else                                                   //mpが足りない場合      
         {
-                Debug.Log( this.power + "のダメージを与えた" );
+            Debug.Log("MPが足りないため、魔法が使えない。");   //コンソールに表示
         }
-
-        // 防御用の関数
-        public  void Defence(int damage)
-        {
-                Debug.Log( damage+"のダメージを受けた" );
-                // 残りhpを減らす
-                this.hp -= damage;
-        }
-
-        // 魔法用の関数
-        public void Magic(int mp)
-        {
-            if (this.mp >= 5) {                                    //mpが5以上の場合
-                this.mp -= mp;                                     //mp5減らす
-                Debug.Log("魔法攻撃をした。残りMPは" + this.mp);   //コンソールに表示
-                
-            }
-
-            else                                                   //mpが足りない場合      
-            {                                                      
-                Debug.Log("MPが足りないため、魔法が使えない。");   //コンソールに表示
-        }
-        }
+    }
 
 }
 
@@ -58,7 +59,7 @@ public class Test : MonoBehaviour
             Debug.Log(array[i]);                    //値を表示
         }
 
-        Array.Reverse(array);                           //逆順にする
+        Array.Reverse(array);                       //逆順にする
 
         Debug.Log("~~~~逆順~~~~");
 
@@ -68,22 +69,22 @@ public class Test : MonoBehaviour
         }
 
 
-        Debug.Log("~~~~魔法攻撃~~~~");              
+        Debug.Log("~~~~魔法攻撃~~~~");
 
         Boss lastboss = new Boss();                 //Magic関数を呼び出し
-           
-            for (int m = 0; m < 10; m++)            //10回魔法を使う
-        {
-                 lastboss.Magic(5);
-            }
 
-             lastboss.Magic(5);                     //さらにMagic関数を呼び出す
+        for (int m = 0; m < 10; m++)                //10回魔法を使う
+        {
+            lastboss.Magic(5);
+        }
+
+        lastboss.Magic(5);                          //さらにMagic関数を呼び出す
 
     }
-// Update is called once per frame
-void Update()
+    // Update is called once per frame
+    void Update()
     {
-       
+
     }
 
 }
